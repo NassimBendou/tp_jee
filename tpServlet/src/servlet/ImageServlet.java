@@ -45,11 +45,11 @@ public class ImageServlet extends HttpServlet
 		out.println("<title>Test Servlet</title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<h2>Bonjour</h2>");
+		out.println("<h2>Bonjour Nassim</h2>");
 		if(msgP!=null)
-			out.println("<p>le message que vous avez envoyé : "+msgP+"</p>");
+			out.println("<p>le message que vous avez envoyï¿½ : "+msgP+"</p>");
 		else
-			out.println("<p>vous n'avez pas envoyé de message</p>");
+			out.println("<p>vous n'avez pas envoyï¿½ de message</p>");
 		out.println("<p>Nombre de rechargement de la page : "+cpt+"</p>");
 		
 		out.println("<img src=\"img/fic.jpg\" width=\"700px\" height=\"500px\"/>");
