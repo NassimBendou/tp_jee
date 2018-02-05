@@ -1,5 +1,7 @@
 <%@page import="base.Base"%>
 <%@page import="bean.Livre"%>
+<jsp:useBean id="livre" class="bean.Livre" scope="request"/>  
+<jsp:setProperty property="*" name="livre" />
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -30,15 +32,11 @@
 	  	if(auteurNonValide) request.setAttribute("msgAuteur", "Veuillez remplir le champ 'auteur' ");
 	  	if(anneNonValide) request.setAttribute("msgAnnee","Veuillez remplir le champ 'année' , l'année doit contenir au moins 4 chiffres");
 	  	
-	  	Livre livre= new Livre();
-	 	livre.setTitre(titre);
-	 	livre.setAuteur(auteur);
-	 	livre.setAnnee(annee);
-	  	request.setAttribute("livre", livre);	  
+	 
+	    
 	  	
-	  	if(!titreNonValide && !auteurNonValide && !anneNonValide)
-	  	{
-		 	
+	  	if(!titreNonValide && !auteurNonValide && !anneNonValide && livre!=null)
+	  	{		 	
 		 	Base base=new Base();
 		 	boolean co=base.ouvrir();	 
 		 	base.enregistrerLivre(livre);
@@ -63,18 +61,18 @@
 		<table>
 		<tr>
 			<td>Titre : </td>
-			<td><input name="titre" type="text" value="<% if(request.getAttribute("livre")!=null) out.print(((Livre)request.getAttribute("livre")).getTitre()); %>" /></td>
-			<td><%if(request.getAttribute("msgTitre")!=null) out.println(request.getAttribute("msgTitre").toString()); %></td>			
+			<td><input name="titre" type="text" value="${livre.titre}" /></td>
+			<td>${msgTitre}</td>			
 		</tr>
 		<tr>
 			<td>Auteur : </td>
-			<td><input name="auteur" type="text" value="<% if(request.getAttribute("livre")!=null) out.print(((Livre)request.getAttribute("livre")).getAuteur()); %>"/></td>
-			<td> <% if(request.getAttribute("msgAuteur") !=null)  out.println(request.getAttribute("msgAuteur").toString()); %></td>
+			<td><input name="auteur" type="text" value="${livre.auteur}" /></td>
+			<td> ${msgAuteur}</td>
 		</tr>
 		<tr>
 			<td>Année : </td>
-			<td><input name="annee" type="text" value="<% if(request.getAttribute("livre")!=null) out.print(((Livre)request.getAttribute("livre")).getAnnee()); %>"/></td>
-			<td><% if(request.getAttribute("msgAnnee") !=null)  out.println(request.getAttribute("msgAnnee").toString()); %></td>
+			<td><input name="annee" type="text" value="${livre.annee}"/></td>
+			<td>${msgAnnee}</td> <!-- accéder à l'attribut mesAnne -->
 		</tr>
 		<tr>
 			<td>&nbsp;</td>		
@@ -82,7 +80,7 @@
 		</tr>
 		<tr>
 			<td>&nbsp;</td>		
-			<td><% if(request.getAttribute("msgResultat")!=null) out.print(request.getAttribute("msgResultat")); %></td>		
+			<td>${msgResultat}</td>		
 		</tr>
 		</table>
 	</form>
