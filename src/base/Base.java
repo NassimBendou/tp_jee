@@ -40,7 +40,8 @@ public class Base {
 	
 	Connection co = null;
 	
-	public boolean ouvrir() {
+	public boolean ouvrir() 
+	{
 		boolean res = false;
 		try {
 			ResourceBundle rs = ResourceBundle.getBundle(config);
